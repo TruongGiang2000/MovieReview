@@ -1,3 +1,6 @@
 {
-    "main": "Splash.view.tsx"
+    "main": "Splash.view.tsx",
+    "devDependencies": {
+        "@types/react-native-indicators": "^0.16.0"
+    }
 }

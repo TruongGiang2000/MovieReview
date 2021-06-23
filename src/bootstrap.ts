@@ -12,7 +12,7 @@ import {RootStoreState, setLanguage} from '@shared-state';
 export const load = async () => {
   if (!__DEV__) {
     await Crash.setEnabled(true);
-    Crash.notifyUserConfirmation(Crashes.UserConfirmation.ALWAYS_SEND);
+    Crash.notifyUserConfirmation(Crash.UserConfirmation.ALWAYS_SEND);
   }
   AppCenter.getInstallId().then((installId) => {
     App.installID = installId;
@@ -28,7 +28,7 @@ export const AppLogic = () => {
   React.useEffect(() => {
     let _lang = language;
     if (_lang == '') {
-      const fallback = {languageTag: 'en', isRTL: false};
+      const fallback = {languageTag: 'vi', isRTL: false};
       const {languageTag, isRTL} =
         RNLocalize.findBestAvailableLanguage(Object.keys(translationGetters)) ||
         fallback;

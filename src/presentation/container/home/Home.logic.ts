@@ -1,10 +1,12 @@
-import React, {useEffect} from 'react';
+import React, {useState} from 'react';
 import {HomeSelector} from './Home.redux-selector';
 import {useSelector, useDispatch} from 'react-redux';
 import {createSelector} from 'reselect';
 
 export const HomeLogic = () => {
   const dispatch = useDispatch();
-  const {} = useSelector(HomeSelector);
-  return {};
+  const {language} = useSelector(HomeSelector);
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState(!!language ? language : 'vi');
+  return {open, setOpen, value, setValue};
 };

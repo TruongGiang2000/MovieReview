@@ -12,5 +12,5 @@ export type HomeProps = {
 };
 
 export type HomeReduxSelectionState = {
-  uri: string;
+  language: string;
 };

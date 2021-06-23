@@ -8,7 +8,7 @@ export type SystemState = {
   splashLoad: boolean;
 };
 const INITIAL_STATE: SystemState = {
-  language: '',
+  language: 'vi',
   mode: 'production',
   splashLoad: false,
 };

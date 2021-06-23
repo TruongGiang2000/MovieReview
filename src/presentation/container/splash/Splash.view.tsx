@@ -2,17 +2,26 @@ import React from 'react';
 import {View, Text} from 'react-native';
 import {splashLogic} from './Splash.logic';
 import {styles} from './Splash.styles';
-import {LOGO} from '@assets';
-import Image from 'react-native-fast-image';
+import {PacmanIndicator} from 'react-native-indicators';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
+import {Colors} from '@resources';
+import {translate} from '@helpers';
 export const SplashScreen = () => {
   const {mode, label} = splashLogic();
   return (
     <View style={styles.container}>
-      <Image source={LOGO} style={styles.logo} />
-      <Text>
+      {/* <Text>
         {mode == 'staging' ? 'DEV ' : ''}
         {label}
-      </Text>
+      </Text> */}
+      <Text style={styles.titleStyle}>Movie Review</Text>
+      <Text style={styles.subTitle}>{translate('des_app')}</Text>
+      <View style={{width: wp(15), position: 'absolute', bottom: hp(1)}}>
+        <PacmanIndicator size={wp(15)} color={Colors.mainColor} />
+      </View>
     </View>
   );
 };

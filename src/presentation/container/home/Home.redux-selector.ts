@@ -6,6 +6,6 @@ export const HomeSelector: Selector<RootStoreState, HomeReduxSelectionState> = (
   state,
 ) => {
   return {
-    uri: state.authentication.uri,
+    language: state.systems.language,
   };
 };

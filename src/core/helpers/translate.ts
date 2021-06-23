@@ -3,7 +3,7 @@ import i18n from 'i18n-js';
 import {translationGetters} from '@resources';
 
 export type Keys = keyof typeof translationGetters.en;
-export type LanguageTag = 'en';
+export type LanguageTag = 'en' | 'vi';
 
 export const translate = memoize((key: Keys) => i18n.t(key));
 
