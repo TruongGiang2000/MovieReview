@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingBottom: hp(2),
+    paddingBottom: hp(1),
     marginHorizontal: wp(1),
   },
   viewLine: {

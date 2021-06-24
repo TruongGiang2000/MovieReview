@@ -10,7 +10,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0,0,0,0.9)',
+    backgroundColor: Colors.blackColor,
   },
   logo: {width: 200, height: 150},
   titleStyle: {
@@ -24,4 +24,5 @@ export const styles = StyleSheet.create({
     fontFamily: Fonts.Open_Sans_Regular,
     marginTop: hp(0.6),
   },
+  viewLoading: {width: wp(15), position: 'absolute', bottom: hp(1)},
 });

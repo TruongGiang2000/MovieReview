@@ -19,7 +19,7 @@ export const SplashScreen = () => {
       </Text> */}
       <Text style={styles.titleStyle}>Movie Review</Text>
       <Text style={styles.subTitle}>{translate('des_app')}</Text>
-      <View style={{width: wp(15), position: 'absolute', bottom: hp(1)}}>
+      <View style={styles.viewLoading}>
         <PacmanIndicator size={wp(15)} color={Colors.mainColor} />
       </View>
     </View>
