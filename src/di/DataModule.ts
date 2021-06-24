@@ -1,6 +1,5 @@
 import {container} from 'tsyringe';
-import {ApiAuthenticationDataSource} from '@data';
-import {SignInUseCase} from '@domain';
+import {ApiAuthenticationDataSource, ApiSystemsDataSource} from '@data';
 import {BearerAuthorizationRxAxiosProvider, BuildConfig} from '@core';
 import {AppDependencies} from './type';
 
@@ -13,8 +12,7 @@ export function registerDataDependencies() {
   container.register(AppDependencies.RemoteAuthenticationDataSource, {
     useClass: ApiAuthenticationDataSource,
   });
-
-  container.register(AppDependencies.SignInUseCase, {
-    useClass: SignInUseCase,
+  container.register(AppDependencies.RemoteSystemsDataSource, {
+    useClass: ApiSystemsDataSource,
   });
 }

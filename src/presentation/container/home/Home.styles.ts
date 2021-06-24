@@ -13,8 +13,8 @@ export const styles = StyleSheet.create({
     paddingVertical: hp(2),
   },
   watchNow: {
-    fontSize: wp(6),
-    fontFamily: Fonts.Open_Sans_Semibold,
+    fontSize: wp(7),
+    fontFamily: Fonts.Open_Sans_Bold,
     color: '#fff',
     flex: 1,
   },

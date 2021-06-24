@@ -5,12 +5,9 @@ import {
   registerFlyValue,
 } from '@di';
 import {RxRemoteProvider} from '@core';
-import {
-  LocalAuthenticationDataSource,
-  RemoteAuthenticationDataSource,
-} from '@data';
+import {RemoteAuthenticationDataSource, RemoteSystemsDataSource} from '@data';
 import {StoreContainer} from '@shared-state';
-import {AuthenticationRepository, SignInUseCase} from '@domain';
+import {AuthenticationRepository, SystemsRepository} from '@domain';
 
 describe('Register app dependencies', () => {
   it('register', () => {
@@ -18,11 +15,6 @@ describe('Register app dependencies', () => {
     registerFlyValue();
     expect(
       container.resolve<RxRemoteProvider>(AppDependencies.ApiProvider),
-    ).toBeDefined();
-    expect(
-      container.resolve<LocalAuthenticationDataSource>(
-        AppDependencies.LocalAuthenticationDataSource,
-      ),
     ).toBeDefined();
     expect(
       container.resolve<RemoteAuthenticationDataSource>(
@@ -38,7 +30,12 @@ describe('Register app dependencies', () => {
       ),
     ).toBeDefined();
     expect(
-      container.resolve<SignInUseCase>(AppDependencies.SignInUseCase),
+      container.resolve<RemoteSystemsDataSource>(
+        AppDependencies.RemoteAuthenticationDataSource,
+      ),
+    ).toBeDefined();
+    expect(
+      container.resolve<SystemsRepository>(AppDependencies.SystemsRepository),
     ).toBeDefined();
   });
 });

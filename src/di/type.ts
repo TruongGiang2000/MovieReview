@@ -4,4 +4,6 @@ export enum AppDependencies {
   RemoteAuthenticationDataSource = 'RemoteAuthenticationDataSource',
   AuthenticationRepository = 'AuthenticationRepository',
   SignInUseCase = 'SignInUseCase',
+  RemoteSystemsDataSource = 'RemoteSystemsDataSource',
+  SystemsRepository = 'SystemsRepository',
 }

@@ -7,6 +7,7 @@ import {Fonts} from '@resources';
 import {translate} from '@helpers';
 import {ICON_EN, ICON_VI} from '@assets';
 import DropDownPicker from 'react-native-dropdown-picker';
+import {ItemIntro} from './modules';
 export const Home: React.FC<HomeProps> = (props) => {
   const {} = props;
   const {open, setOpen, value, setValue} = HomeLogic();
@@ -41,6 +42,7 @@ export const Home: React.FC<HomeProps> = (props) => {
           />
         </View>
       </View>
+      <ItemIntro />
     </View>
   );
 };
