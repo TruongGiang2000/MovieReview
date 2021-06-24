@@ -39,7 +39,7 @@ export const styles = StyleSheet.create({
     borderRadius: wp(0.3),
     alignSelf: 'flex-end',
   },
-  txtLangugeStyle: {
+  txtLanguageStyle: {
     color: 'white',
     fontFamily: Fonts.Open_Sans_Bold,
     fontSize: wp(3),

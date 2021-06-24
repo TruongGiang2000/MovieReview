@@ -37,7 +37,7 @@ export const Home: React.FC<HomeProps> = (props) => {
             theme={'DARK'}
             setOpen={setOpen}
             style={styles.dropDown}
-            textStyle={styles.txtLangugeStyle}
+            textStyle={styles.txtLanguageStyle}
           />
         </View>
       </View>
