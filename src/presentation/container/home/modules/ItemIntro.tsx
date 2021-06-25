@@ -6,17 +6,20 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 import {POSTER} from '@assets';
-import {Colors, Fonts} from '@resources';
+import {Fonts} from '@resources';
 import StarRating from 'react-native-star-rating';
 export const ItemIntro = (props: any) => {
+  const {name, year, rating, poster} = props;
   return (
     <View style={styles.container}>
-      <IconImage source={POSTER} style={styles.poster} resizeMode={'cover'} />
+      <IconImage source={poster} style={styles.poster} resizeMode={'cover'} />
       <View style={styles.viewCover} />
       <View style={styles.viewAbsolute}>
-        <Text style={styles.titleMovie}>Justice Leaguae</Text>
+        <Text style={styles.titleMovie} numberOfLines={2}>
+          {name}
+        </Text>
         <View style={styles.row}>
-          <Text style={styles.txtYear}>2021</Text>
+          <Text style={styles.txtYear}>{year}</Text>
           <StarRating
             maxStars={5}
             disabled={true}
@@ -24,7 +27,7 @@ export const ItemIntro = (props: any) => {
             containerStyle={{marginLeft: wp(0.2)}}
             fullStarColor={'#ffd50a'}
             emptyStarColor={'#ffd50a'}
-            rating={3}
+            rating={rating}
             starStyle={{margin: wp(0.2)}}
           />
         </View>
@@ -36,10 +39,11 @@ export const ItemIntro = (props: any) => {
 const styles = StyleSheet.create({
   container: {
     width: wp(75),
-    height: hp(15),
+    height: hp(18),
     marginTop: hp(2),
     borderRadius: wp(2),
     overflow: 'hidden',
+    marginRight: wp(4),
   },
   poster: {
     width: '100%',
@@ -49,6 +53,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: hp(1),
     left: wp(3),
+    width: '80%',
   },
   titleMovie: {
     fontFamily: Fonts.Open_Sans_Bold,

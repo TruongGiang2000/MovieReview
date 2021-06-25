@@ -12,4 +12,13 @@ export class CombineSystemsRepository implements SystemsRepository {
     @inject('RemoteSystemsDataSource')
     private readonly remoteDataSource: ApiSystemsDataSource,
   ) {}
+  getUpComing(body: any): Observable<any> {
+    return this.remoteDataSource.getUpComing(body);
+  }
+  getPopular(body: any): Observable<any> {
+    return this.remoteDataSource.getPopular(body);
+  }
+  getTopRating(body: any): Observable<any> {
+    return this.remoteDataSource.getTopRating(body);
+  }
 }

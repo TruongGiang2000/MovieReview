@@ -6,4 +6,5 @@ export enum AppDependencies {
   SignInUseCase = 'SignInUseCase',
   RemoteSystemsDataSource = 'RemoteSystemsDataSource',
   SystemsRepository = 'SystemsRepository',
+  SystemsUseCase = 'SystemsUseCase',
 }

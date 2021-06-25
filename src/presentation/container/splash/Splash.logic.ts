@@ -3,7 +3,7 @@ import {splashSelector} from './Splash.redux-selector';
 import {useSelector, useDispatch} from 'react-redux';
 import CodePush from 'react-native-code-push';
 import {App, Settings} from '@resources';
-import {setSplashLoad} from '@shared-state';
+import {getUpComing, setSplashLoad} from '@shared-state';
 
 export const splashLogic = () => {
   const dispatch = useDispatch();
@@ -12,6 +12,7 @@ export const splashLogic = () => {
   const [codePushSuccess, setCodePushSuccess] = React.useState(false);
 
   React.useEffect(() => {
+    getAllData();
     const deploymentKey = Settings.codePush[mode];
     CodePush.sync(
       !!deploymentKey
@@ -67,6 +68,10 @@ export const splashLogic = () => {
       dispatch(setSplashLoad());
     }
   }, [codePushSuccess]);
+
+  const getAllData = () => {
+    dispatch(getUpComing({language: 'en-US', page: 1}));
+  };
 
   return {
     label,

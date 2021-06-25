@@ -3,11 +3,8 @@ import {BehaviorSubject} from 'rxjs';
 import {StoreContainer, RootStoreState} from './types';
 import {createReducerManager} from './reducer';
 import {createEpicManager} from './epic';
-import {authenticationEpic} from './epics';
-import {
-  systemsReducer,
-  authenticationReducer,
-} from './reducers';
+import {authenticationEpic, systemsEpic} from './epics';
+import {systemsReducer, authenticationReducer} from './reducers';
 import logger from 'redux-logger';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {persistStore, persistReducer} from 'redux-persist';
@@ -21,6 +18,7 @@ export function configureStore(): StoreContainer {
   const {rootEpic, epicMiddleware, epic$, addEpic} = createEpicManager(
     {},
     authenticationEpic,
+    systemsEpic,
   );
 
   // Create a store with the root reducer function being the one exposed by the manager.

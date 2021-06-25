@@ -7,5 +7,6 @@ export const HomeSelector: Selector<RootStoreState, HomeReduxSelectionState> = (
 ) => {
   return {
     language: state.systems.language,
+    upComingMovie: state.systems.upComingMovie,
   };
 };

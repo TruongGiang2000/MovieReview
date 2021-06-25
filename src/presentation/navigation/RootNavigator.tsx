@@ -17,7 +17,7 @@ export const RootNavigator: React.FC = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{headerShown: false}}>
-        {!__DEV__ && !splashLoad ? (
+        {!splashLoad ? (
           <Stack.Screen name="SplashScreen" component={SplashScreen} />
         ) : (
           <Stack.Screen name="MyTab" component={MyTab} />
