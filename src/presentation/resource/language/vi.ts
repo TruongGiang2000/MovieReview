@@ -6,4 +6,10 @@ export default {
   des_app: 'Khám phá bộ phim tốt nhất cho cuối tuần nào',
   popular: 'Phổ biến',
   show_all: 'Xem tất cả',
+  top_rating: 'Thịnh hành',
+  coming_soon: 'Sắp phát hành',
+  waiting: 'Đang chờ',
+  over_view: 'Nội dung',
+  cast: 'Diễn viên',
+  gallery: 'Thư viện',
 };

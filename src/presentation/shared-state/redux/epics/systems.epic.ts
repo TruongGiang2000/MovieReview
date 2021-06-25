@@ -5,13 +5,31 @@ import {filter, catchError, switchMap, map} from 'rxjs/operators';
 
 import {AppDependencies} from '@di';
 
-import {getUpComing, getUpComingFail, getUpComingSuccess} from '../actions';
+import {
+  getDetailMovie,
+  getDetailMovieFail,
+  getDetailMovieSuccess,
+  getGalleryMovie,
+  getGalleryMovieFail,
+  getGalleryMovieSuccess,
+  getPopular,
+  getPopularFail,
+  getPopularSuccess,
+  getTopRating,
+  getTopRatingFail,
+  getTopRatingSuccess,
+  getUpComing,
+  getUpComingFail,
+  getUpComingSuccess,
+  getCredits,
+  getCreditsSuccess,
+  getCreditsFail,
+} from '../actions';
 import {SystemUseCase} from '@domain';
 const getUpComingEpic$ = (actions$: any) =>
   actions$.pipe(
     filter(getUpComing.match),
     switchMap((action: any) => {
-      console.log('actionEpic', action);
       let useCase = container.resolve<SystemUseCase>(
         AppDependencies.SystemsUseCase,
       );
@@ -21,4 +39,80 @@ const getUpComingEpic$ = (actions$: any) =>
       );
     }),
   );
-export const systemsEpic = combineEpics(getUpComingEpic$);
+const getPopularEpic$ = (actions$: any) =>
+  actions$.pipe(
+    filter(getPopular.match),
+    switchMap((action: any) => {
+      let useCase = container.resolve<SystemUseCase>(
+        AppDependencies.SystemsUseCase,
+      );
+      return useCase.getPopular(action.payload).pipe(
+        map(getPopularSuccess),
+        catchError((error) => of(getPopularFail(error))),
+      );
+    }),
+  );
+
+const getTopRatingEpic$ = (actions$: any) =>
+  actions$.pipe(
+    filter(getTopRating.match),
+    switchMap((action: any) => {
+      let useCase = container.resolve<SystemUseCase>(
+        AppDependencies.SystemsUseCase,
+      );
+      return useCase.getTopRating(action.payload).pipe(
+        map(getTopRatingSuccess),
+        catchError((error) => of(getTopRatingFail(error))),
+      );
+    }),
+  );
+
+const getDetailMovieEpic$ = (action$: any) =>
+  action$.pipe(
+    filter(getDetailMovie.match),
+    switchMap((action: any) => {
+      let useCase = container.resolve<SystemUseCase>(
+        AppDependencies.SystemsUseCase,
+      );
+      return useCase.getDetailMovie(action.payload).pipe(
+        map(getDetailMovieSuccess),
+        catchError((error) => of(getDetailMovieFail(error))),
+      );
+    }),
+  );
+
+const getGalleryMovieEpic$ = (action$: any) =>
+  action$.pipe(
+    filter(getGalleryMovie.match),
+    switchMap((action: any) => {
+      let useCase = container.resolve<SystemUseCase>(
+        AppDependencies.SystemsUseCase,
+      );
+      return useCase.getGalleryMovie(action.payload).pipe(
+        map(getGalleryMovieSuccess),
+        catchError((error) => of(getGalleryMovieFail(error))),
+      );
+    }),
+  );
+
+const getCreditsMovieEpic$ = (action$: any) =>
+  action$.pipe(
+    filter(getCredits.match),
+    switchMap((action: any) => {
+      let useCase = container.resolve<SystemUseCase>(
+        AppDependencies.SystemsUseCase,
+      );
+      return useCase.getCredits(action?.payload).pipe(
+        map(getCreditsSuccess),
+        catchError((error) => of(getCreditsFail(error))),
+      );
+    }),
+  );
+export const systemsEpic = combineEpics(
+  getUpComingEpic$,
+  getPopularEpic$,
+  getTopRatingEpic$,
+  getDetailMovieEpic$,
+  getGalleryMovieEpic$,
+  getCreditsMovieEpic$,
+);

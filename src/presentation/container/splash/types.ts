@@ -13,4 +13,8 @@ export type SplashProps = {
 
 export type SplashReduxSelectionState = {
   mode: ModeType;
+  language: string;
+  upComingMovie: any;
+  popularMovie: any;
+  topRatingMovie: any;
 };

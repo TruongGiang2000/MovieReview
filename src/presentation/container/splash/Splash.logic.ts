@@ -3,11 +3,23 @@ import {splashSelector} from './Splash.redux-selector';
 import {useSelector, useDispatch} from 'react-redux';
 import CodePush from 'react-native-code-push';
 import {App, Settings} from '@resources';
-import {getUpComing, setSplashLoad} from '@shared-state';
-
+import {
+  getPopular,
+  getTopRating,
+  getUpComing,
+  setSplashLoad,
+} from '@shared-state';
+import {isEmpty} from 'lodash';
+import {languageRequest} from '@hooks';
 export const splashLogic = () => {
   const dispatch = useDispatch();
-  const {mode} = useSelector(splashSelector);
+  const {
+    mode,
+    language,
+    popularMovie,
+    topRatingMovie,
+    upComingMovie,
+  } = useSelector(splashSelector);
   const [label, setLabel] = React.useState('');
   const [codePushSuccess, setCodePushSuccess] = React.useState(false);
 
@@ -64,13 +76,24 @@ export const splashLogic = () => {
   };
 
   React.useEffect(() => {
-    if (codePushSuccess) {
+    if (
+      codePushSuccess &&
+      !isEmpty(upComingMovie) &&
+      !isEmpty(popularMovie) &&
+      !isEmpty(topRatingMovie)
+    ) {
       dispatch(setSplashLoad());
     }
   }, [codePushSuccess]);
-
+  
+  const dataGetMovie = {
+    language: languageRequest(),
+    page: 1,
+  };
   const getAllData = () => {
-    dispatch(getUpComing({language: 'en-US', page: 1}));
+    dispatch(getUpComing(dataGetMovie));
+    dispatch(getPopular(dataGetMovie));
+    dispatch(getTopRating(dataGetMovie));
   };
 
   return {

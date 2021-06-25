@@ -6,4 +6,10 @@ export default {
   des_app: 'Discover the best movie for your weekend',
   popular: 'Popular',
   show_all: 'Show all',
+  top_rating: 'Top Rating',
+  coming_soon: 'Coming soon',
+  waiting: 'Waiting',
+  over_view: 'Over view',
+  cast: 'Cast',
+  gallery: 'Gallery',
 };

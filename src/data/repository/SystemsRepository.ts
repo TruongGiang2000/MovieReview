@@ -5,6 +5,7 @@ import {map} from 'rxjs/operators';
 import {SystemsRepository} from '@domain';
 
 import {ApiSystemsDataSource} from '../data-source';
+import {RequestMovieDetail} from '../model';
 
 @injectable()
 export class CombineSystemsRepository implements SystemsRepository {
@@ -20,5 +21,14 @@ export class CombineSystemsRepository implements SystemsRepository {
   }
   getTopRating(body: any): Observable<any> {
     return this.remoteDataSource.getTopRating(body);
+  }
+  getDetailMovie(body: RequestMovieDetail): Observable<any> {
+    return this.remoteDataSource.getDetailMovie(body);
+  }
+  getGalleryMovie(body: RequestMovieDetail): Observable<any> {
+    return this.remoteDataSource.getGalleryMovie(body);
+  }
+  getCredits(body: RequestMovieDetail): Observable<any> {
+    return this.remoteDataSource.getCredits(body);
   }
 }

@@ -8,5 +8,9 @@ export const splashSelector: Selector<
 > = (state) => {
   return {
     mode: state.systems.mode,
+    language: state.systems.language,
+    upComingMovie: state.systems.upComingMovie,
+    popularMovie: state.systems.popularMovie,
+    topRatingMovie: state.systems.topRatingMovie,
   };
 };

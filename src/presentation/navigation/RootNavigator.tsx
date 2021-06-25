@@ -4,7 +4,7 @@ import {useSelector} from 'react-redux';
 import {createNativeStackNavigator} from 'react-native-screens/native-stack';
 import {enableScreens} from 'react-native-screens';
 import {RootStoreState} from '@shared-state';
-import {SplashScreen, Home} from '@containers';
+import {SplashScreen, Home, DetailMovie} from '@containers';
 import {MyTab} from './Bottomnavigation';
 enableScreens();
 const Stack = createNativeStackNavigator();
@@ -20,7 +20,10 @@ export const RootNavigator: React.FC = () => {
         {!splashLoad ? (
           <Stack.Screen name="SplashScreen" component={SplashScreen} />
         ) : (
-          <Stack.Screen name="MyTab" component={MyTab} />
+          <>
+            <Stack.Screen name="MyTab" component={MyTab} />
+            <Stack.Screen name="MovieDetail" component={DetailMovie} />
+          </>
         )}
       </Stack.Navigator>
     </NavigationContainer>

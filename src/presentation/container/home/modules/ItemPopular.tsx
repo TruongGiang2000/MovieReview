@@ -1,35 +1,40 @@
-import {POSTER} from '@assets';
-import {Fonts} from '@resources';
+import {Fonts, Settings} from '@resources';
 import React from 'react';
 import {StyleSheet, Image, Text} from 'react-native';
-import {View} from 'react-native';
+import {TouchableOpacity} from 'react-native';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 export const ItemPopular = (props: any) => {
-  let a: number = 3.3;
+  const {name, year, rating, poster, onPress} = props;
   return (
-    <View style={styles.container}>
-      <Image
-        source={POSTER}
-        style={{width: '100%', height: '85%', borderRadius: wp(1)}}
-      />
-      <Text style={styles.nameMovie}>Justice League</Text>
-      <Text style={styles.yearTxt}>2021</Text>
+    <TouchableOpacity style={styles.container} onPress={onPress}>
+      <Image source={poster} style={styles.poster} />
+      <Text style={styles.nameMovie} numberOfLines={2}>
+        {name}
+      </Text>
+      <Text style={styles.yearTxt}>{year}</Text>
       <Text
         style={[
           styles.starView,
-          {backgroundColor: a > 4.0 ? '#f23e51' : '#f1a808'},
+          {
+            backgroundColor:
+              rating >= Settings.starHigh ? '#f23e51' : '#f1a808',
+          },
         ]}>
-        {(Math.round(a * 100) / 100).toFixed(1)}
+        {(Math.round((rating || 0) * 100) / 100).toFixed(1)}
       </Text>
-    </View>
+    </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {width: wp(30), height: hp(25)},
+  container: {
+    width: wp(30),
+    marginRight: wp(3),
+    height: hp(33),
+  },
   nameMovie: {
     color: '#fff',
     fontFamily: Fonts.Open_Sans_Regular,
@@ -47,9 +52,9 @@ const styles = StyleSheet.create({
     borderRadius: wp(4),
     position: 'absolute',
     fontSize: wp(2),
-    top: -hp(1),
     paddingHorizontal: wp(2.5),
     paddingVertical: hp(0.5),
     alignSelf: 'center',
   },
+  poster: {width: '100%', height: '75%', borderRadius: wp(1), marginTop: hp(1)},
 });

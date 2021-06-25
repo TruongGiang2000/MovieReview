@@ -14,7 +14,6 @@ export const styles = StyleSheet.create({
     fontSize: wp(7),
     fontFamily: Fonts.Open_Sans_Bold,
     color: '#fff',
-    flex: 1,
   },
   icon: {
     width: wp(3),
@@ -25,17 +24,21 @@ export const styles = StyleSheet.create({
     marginTop: 1,
     borderWidth: 1,
     borderColor: 'white',
-    width: '80%',
-    alignSelf: 'flex-end',
+    width: '35%',
+    top: hp(6.8),
+    right: wp(3),
+    position: 'absolute',
   },
   dropDown: {
     backgroundColor: '#1f1b24', //1E1E2E
     borderWidth: 1,
     borderColor: 'white',
     height: hp(4.5),
-    width: '80%',
+    width: '35%',
     borderRadius: wp(0.3),
-    alignSelf: 'flex-end',
+    position: 'absolute',
+    top: hp(2.3),
+    right: wp(3),
   },
   txtLanguageStyle: {
     color: 'white',

@@ -4,9 +4,11 @@ import {useSelector, useDispatch} from 'react-redux';
 import {setLanguage} from '@shared-state';
 import CodePush from 'react-native-code-push';
 
-export const HomeLogic = () => {
+export const HomeLogic = (props: any) => {
   const dispatch = useDispatch();
-  const {language, upComingMovie} = useSelector(HomeSelector);
+  const {language, upComingMovie, popularMovie, topRatingMovie} = useSelector(
+    HomeSelector,
+  );
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(!!language ? language : 'vi');
   const refLanguage = useRef(language);
@@ -20,5 +22,17 @@ export const HomeLogic = () => {
     }, 500);
   }, [value]);
 
-  return {open, setOpen, value, setValue, upComingMovie};
+  const goToDetailMovie = (idMovie: number) => () =>
+    props?.navigation?.navigate('MovieDetail', {idMovie});
+
+  return {
+    open,
+    setOpen,
+    value,
+    setValue,
+    upComingMovie,
+    popularMovie,
+    topRatingMovie,
+    goToDetailMovie,
+  };
 };

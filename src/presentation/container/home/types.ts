@@ -14,4 +14,6 @@ export type HomeProps = {
 export type HomeReduxSelectionState = {
   language: string;
   upComingMovie: any;
+  popularMovie: any;
+  topRatingMovie: any;
 };

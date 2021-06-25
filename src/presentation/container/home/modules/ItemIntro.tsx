@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet, Text} from 'react-native';
+import {View, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import {IconImage} from '@components';
 import {
   widthPercentageToDP as wp,
@@ -9,9 +9,9 @@ import {POSTER} from '@assets';
 import {Fonts} from '@resources';
 import StarRating from 'react-native-star-rating';
 export const ItemIntro = (props: any) => {
-  const {name, year, rating, poster} = props;
+  const {name, year, rating, poster, onPress} = props;
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={onPress}>
       <IconImage source={poster} style={styles.poster} resizeMode={'cover'} />
       <View style={styles.viewCover} />
       <View style={styles.viewAbsolute}>
@@ -32,7 +32,7 @@ export const ItemIntro = (props: any) => {
           />
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

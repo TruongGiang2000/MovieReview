@@ -3,9 +3,11 @@ export const Settings = {
     production: '',
     staging: '',
   },
+  starHigh: 4.0,
 } as {
   codePush: {
     production: string;
     staging: string;
   };
+  starHigh: number;
 };
