@@ -5,6 +5,7 @@ import {
   getCredits,
   getDetailMovie,
   getGalleryMovie,
+  getRelate,
   getVideo,
 } from '@shared-state';
 import {RequestMovieDetail} from '@data';
@@ -19,9 +20,13 @@ import {
 } from 'react-native-responsive-screen';
 export const DetailMovieLogic = (props: any) => {
   const dispatch = useDispatch();
-  const {creditsMovie, detailMovie, galleryMovie, videoMovie} = useSelector(
-    DetailMovieSelector,
-  );
+  const {
+    creditsMovie,
+    detailMovie,
+    galleryMovie,
+    videoMovie,
+    relateMovie,
+  } = useSelector(DetailMovieSelector);
   const idMovie = props?.route?.params?.idMovie;
 
   const bodyDetailMovie: RequestMovieDetail = {
@@ -53,6 +58,7 @@ export const DetailMovieLogic = (props: any) => {
     );
     dispatch(getCredits(bodyDetailMovie));
     dispatch(getVideo({...bodyDetailMovie, language: 'en-US'}));
+    dispatch(getRelate(bodyDetailMovie));
   }, [idMovie]);
 
   const goBack = () => props?.navigation?.goBack();
@@ -68,5 +74,6 @@ export const DetailMovieLogic = (props: any) => {
     creditsMovie,
     galleryMovie,
     videoMovie,
+    relateMovie,
   };
 };

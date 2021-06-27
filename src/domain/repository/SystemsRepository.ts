@@ -10,4 +10,5 @@ export interface SystemsRepository {
   getGalleryMovie(body: RequestMovieDetail): Observable<any>;
   getCredits(body: RequestMovieDetail): Observable<any>;
   getVideo(body: RequestMovieDetail): Observable<any>;
+  getRelate(body: RequestMovieDetail): Observable<any>;
 }

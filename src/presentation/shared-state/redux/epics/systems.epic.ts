@@ -27,6 +27,10 @@ import {
   getVideo,
   getVideoSuccess,
   getVideoFail,
+  getRelate,
+  getRelateSuccess,
+  getRealteFail,
+  getRelateFail,
 } from '../actions';
 import {SystemUseCase} from '@domain';
 const getUpComingEpic$ = (actions$: any) =>
@@ -125,6 +129,20 @@ const getVideoMovie$ = (action$: any) =>
       );
     }),
   );
+
+const getRelateMovie$ = (action$: any) =>
+  action$.pipe(
+    filter(getRelate.match),
+    switchMap((action: any) => {
+      let useCase = container.resolve<SystemUseCase>(
+        AppDependencies.SystemsUseCase,
+      );
+      return useCase.getRelate(action?.payload).pipe(
+        map(getRelateSuccess),
+        catchError((error) => of(getRelateFail(error))),
+      );
+    }),
+  );
 export const systemsEpic = combineEpics(
   getUpComingEpic$,
   getPopularEpic$,
@@ -133,4 +151,5 @@ export const systemsEpic = combineEpics(
   getGalleryMovieEpic$,
   getCreditsMovieEpic$,
   getVideoMovie$,
+  getRelateMovie$,
 );

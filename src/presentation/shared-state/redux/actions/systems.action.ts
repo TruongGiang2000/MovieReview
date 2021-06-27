@@ -57,4 +57,12 @@ export const getVideoFail = createAction<RequestMovieDetail>(
   'systems/getVideoFail',
 );
 
+export const getRelate = createAction<RequestMovieDetail>('system/getRelate');
+export const getRelateSuccess = createAction<RequestMovieDetail>(
+  'systems/getRelateSuccsess',
+);
+export const getRelateFail = createAction<RequestMovieDetail>(
+  'systems/getRelateFail',
+);
+
 export type SystemsEpicActions = any;

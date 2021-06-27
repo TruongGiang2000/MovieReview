@@ -12,6 +12,7 @@ export interface RemoteSystemsDataSource {
   getTopRating(data: any): Observable<any>;
   getDetailMovie(body: any): Observable<any>;
   getVideo(body: any): Observable<any>;
+  getRelate(body: any): Observable<any>;
 }
 
 @injectable()
@@ -53,6 +54,11 @@ export class ApiSystemsDataSource implements RemoteSystemsDataSource {
   getVideo(body: RequestMovieDetail): Observable<any> {
     return this.provider
       .get(`${body?.movieID}/videos`, configApiKey(body))
+      .pipe(map((response) => response.data));
+  }
+  getRelate(body: RequestMovieDetail): Observable<any> {
+    return this.provider
+      .get(`${body?.movieID}/recommendations`, configApiKey(body))
       .pipe(map((response) => response.data));
   }
 }

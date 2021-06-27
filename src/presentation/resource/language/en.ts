@@ -13,4 +13,5 @@ export default {
   cast: 'Cast',
   gallery: 'Gallery',
   trailer: 'Trailers',
+  relate: 'Maybe you like',
 };

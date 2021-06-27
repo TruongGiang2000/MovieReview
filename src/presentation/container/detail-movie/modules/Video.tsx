@@ -8,6 +8,7 @@ import {
 } from 'react-native-responsive-screen';
 import Video from 'react-native-video';
 import {Thumbnail} from 'react-native-thumbnail-video';
+import lodash from 'lodash';
 export const VideoMovie = (props: any) => {
   const {data} = props;
 
@@ -26,7 +27,7 @@ export const VideoMovie = (props: any) => {
       />
     );
   };
-  if (!data) return;
+  if (lodash.isEmpty(data)) return null;
   return (
     <FlatList
       data={data}

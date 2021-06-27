@@ -13,4 +13,5 @@ export default {
   cast: 'Diễn viên',
   gallery: 'Thư viện',
   trailer: 'Giới thiệu',
+  relate: 'Có thể bạn sẽ thích',
 };

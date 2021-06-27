@@ -11,7 +11,7 @@ import {
 import moment from 'moment';
 import {parseMinuteToHour, translate} from '@helpers';
 import {Colors, Fonts} from '@resources';
-import {Cast, Gallery, VideoMovie} from './modules';
+import {Cast, Gallery, VideoMovie, RelateMovie} from './modules';
 export const DetailMovie = (props: any) => {
   const {} = props;
   const {
@@ -24,6 +24,7 @@ export const DetailMovie = (props: any) => {
     creditsMovie,
     galleryMovie,
     videoMovie,
+    relateMovie,
   } = DetailMovieLogic(props);
 
   return (
@@ -66,7 +67,11 @@ export const DetailMovie = (props: any) => {
             data={videoMovie?.results}
             navigation={props?.navigation}
           />
-          <Text>aaaa</Text>
+          <Text style={styles.txtTitleGeneral}> {translate('relate')}</Text>
+          <RelateMovie
+            data={relateMovie?.results}
+            navigation={props?.navigation}
+          />
         </ScrollView>
       </View>
     </View>

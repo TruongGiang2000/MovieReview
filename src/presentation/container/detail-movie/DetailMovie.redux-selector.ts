@@ -11,5 +11,6 @@ export const DetailMovieSelector: Selector<
     detailMovie: state.systems.detailMovie,
     galleryMovie: state.systems.galleryMovie,
     videoMovie: state.systems.videoMovie,
+    relateMovie: state.systems.relateMovie,
   };
 };

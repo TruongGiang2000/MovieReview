@@ -19,4 +19,5 @@ export type DetailMovieReduxSelectionState = {
   galleryMovie: any;
   creditsMovie: any;
   videoMovie: any;
+  relateMovie: any;
 };
