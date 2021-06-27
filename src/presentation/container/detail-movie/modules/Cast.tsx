@@ -28,6 +28,7 @@ export const Cast = (props: any) => {
       renderItem={renderItem}
       horizontal={true}
       showsHorizontalScrollIndicator={false}
+      keyExtractor={(item, index) => index.toString()}
     />
   );
 };

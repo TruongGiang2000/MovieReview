@@ -6,6 +6,7 @@ import {enableScreens} from 'react-native-screens';
 import {RootStoreState} from '@shared-state';
 import {SplashScreen, Home, DetailMovie} from '@containers';
 import {MyTab} from './Bottomnavigation';
+import {YoutubeFullScreen} from '../modules';
 enableScreens();
 const Stack = createNativeStackNavigator();
 
@@ -23,6 +24,10 @@ export const RootNavigator: React.FC = () => {
           <>
             <Stack.Screen name="MyTab" component={MyTab} />
             <Stack.Screen name="MovieDetail" component={DetailMovie} />
+            <Stack.Screen
+              name="YoutubeFullScreen"
+              component={YoutubeFullScreen}
+            />
           </>
         )}
       </Stack.Navigator>

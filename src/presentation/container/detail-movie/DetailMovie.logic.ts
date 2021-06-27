@@ -1,7 +1,12 @@
 import {DetailMovieSelector} from './DetailMovie.redux-selector';
 import {useSelector, useDispatch} from 'react-redux';
 import {useEffect, useState} from 'react';
-import {getCredits, getDetailMovie, getGalleryMovie} from '@shared-state';
+import {
+  getCredits,
+  getDetailMovie,
+  getGalleryMovie,
+  getVideo,
+} from '@shared-state';
 import {RequestMovieDetail} from '@data';
 import {languageRequest} from '@hooks';
 import lodash from 'lodash';
@@ -14,7 +19,7 @@ import {
 } from 'react-native-responsive-screen';
 export const DetailMovieLogic = (props: any) => {
   const dispatch = useDispatch();
-  const {creditsMovie, detailMovie, galleryMovie} = useSelector(
+  const {creditsMovie, detailMovie, galleryMovie, videoMovie} = useSelector(
     DetailMovieSelector,
   );
   const idMovie = props?.route?.params?.idMovie;
@@ -41,11 +46,13 @@ export const DetailMovieLogic = (props: any) => {
     : translate('coming_soon');
 
   useEffect(() => {
+    if (!idMovie) return;
     dispatch(getDetailMovie(bodyDetailMovie));
     dispatch(
       getGalleryMovie({...bodyDetailMovie, include_image_language: 'en'}),
     );
     dispatch(getCredits(bodyDetailMovie));
+    dispatch(getVideo({...bodyDetailMovie, language: 'en-US'}));
   }, [idMovie]);
 
   const goBack = () => props?.navigation?.goBack();
@@ -60,5 +67,6 @@ export const DetailMovieLogic = (props: any) => {
     heightBackDrop,
     creditsMovie,
     galleryMovie,
+    videoMovie,
   };
 };

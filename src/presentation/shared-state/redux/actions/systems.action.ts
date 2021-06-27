@@ -49,4 +49,12 @@ export const getCreditsFail = createAction<RequestMovieDetail>(
   'systems/getCreditsFail',
 );
 
+export const getVideo = createAction<RequestMovieDetail>('systems/getVideo');
+export const getVideoSuccess = createAction<RequestMovieDetail>(
+  'systems/getVideoSuccess',
+);
+export const getVideoFail = createAction<RequestMovieDetail>(
+  'systems/getVideoFail',
+);
+
 export type SystemsEpicActions = any;

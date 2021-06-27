@@ -37,6 +37,7 @@ export const styles = StyleSheet.create({
     borderTopRightRadius: wp(10),
     paddingVertical: hp(2),
     paddingHorizontal: wp(4),
+    overflow: 'hidden',
   },
   nameMovie: {
     fontFamily: Fonts.Open_Sans_Bold,

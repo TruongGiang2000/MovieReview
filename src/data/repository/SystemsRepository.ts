@@ -31,4 +31,7 @@ export class CombineSystemsRepository implements SystemsRepository {
   getCredits(body: RequestMovieDetail): Observable<any> {
     return this.remoteDataSource.getCredits(body);
   }
+  getVideo(body: RequestMovieDetail): Observable<any> {
+    return this.remoteDataSource.getVideo(body);
+  }
 }

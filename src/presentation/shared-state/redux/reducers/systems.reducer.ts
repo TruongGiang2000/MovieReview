@@ -15,6 +15,8 @@ import {
   getGalleryMovieSuccess,
   getCredits,
   getCreditsSuccess,
+  getVideo,
+  getVideoSuccess,
 } from '../actions';
 
 export type ModeType = 'production' | 'staging';
@@ -28,6 +30,7 @@ export type SystemState = {
   detailMovie: any;
   galleryMovie: any;
   creditsMovie: any;
+  videoMovie: any;
 };
 const INITIAL_STATE: SystemState = {
   language: 'vi',
@@ -39,6 +42,7 @@ const INITIAL_STATE: SystemState = {
   detailMovie: undefined,
   galleryMovie: undefined,
   creditsMovie: undefined,
+  videoMovie: undefined,
 };
 export const systemsReducer = createReducer(INITIAL_STATE, (builder) =>
   builder
@@ -84,5 +88,11 @@ export const systemsReducer = createReducer(INITIAL_STATE, (builder) =>
     )
     .addCase(getCreditsSuccess, (state, action) =>
       Object.assign(state, {creditsMovie: action.payload}),
+    )
+    .addCase(getVideo, (state, action) =>
+      Object.assign(state, {videoMovie: undefined}),
+    )
+    .addCase(getVideoSuccess, (state, action) =>
+      Object.assign(state, {videoMovie: action.payload}),
     ),
 );

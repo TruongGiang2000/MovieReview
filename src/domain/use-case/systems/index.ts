@@ -39,4 +39,9 @@ export class SystemUseCase {
       .getCredits(body)
       .pipe(mergeMap((result: any) => of(result)));
   }
+  getVideo(body: RequestMovieDetail): Observable<any> {
+    return this.systemRepository
+      .getVideo(body)
+      .pipe(mergeMap((result: any) => of(result)));
+  }
 }

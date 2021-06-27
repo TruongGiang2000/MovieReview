@@ -12,4 +12,5 @@ export default {
   over_view: 'Over view',
   cast: 'Cast',
   gallery: 'Gallery',
+  trailer: 'Trailers',
 };

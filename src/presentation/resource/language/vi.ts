@@ -12,4 +12,5 @@ export default {
   over_view: 'Nội dung',
   cast: 'Diễn viên',
   gallery: 'Thư viện',
+  trailer: 'Giới thiệu',
 };

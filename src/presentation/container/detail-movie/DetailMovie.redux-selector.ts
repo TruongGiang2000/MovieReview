@@ -10,5 +10,6 @@ export const DetailMovieSelector: Selector<
     creditsMovie: state.systems.creditsMovie,
     detailMovie: state.systems.detailMovie,
     galleryMovie: state.systems.galleryMovie,
+    videoMovie: state.systems.videoMovie,
   };
 };

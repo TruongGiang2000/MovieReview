@@ -66,7 +66,7 @@ export class BearerAuthorizationRxAxiosProvider<Result = any>
           observer.complete();
         })
         .catch((error) => {
-          console.log('axiosInstance error', error);
+          console.log('axiosInstance error', error.response);
           observer.error(error);
         });
     });

@@ -1,3 +1,6 @@
 {
-    "main": "DetailMovie.view.tsx"
+    "main": "DetailMovie.view.tsx",
+    "devDependencies": {
+        "@types/react-native-video": "^5.0.7"
+    }
 }
