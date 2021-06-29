@@ -40,7 +40,7 @@
 		</dict>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string/>
+	<string></string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
@@ -57,6 +57,7 @@
 	<false/>
 	<key>UIAppFonts</key>
 	<array>
+		<string>OpenSans-Regular.ttf</string>
 		<string>OpenSans-Bold.ttf</string>
 		<string>OpenSans-BoldItalic.ttf</string>
 		<string>OpenSans-ExtraBold.ttf</string>
@@ -64,7 +65,6 @@
 		<string>OpenSans-Italic.ttf</string>
 		<string>OpenSans-Light.ttf</string>
 		<string>OpenSans-LightItalic.ttf</string>
-		<string>OpenSans-Regular.ttf</string>
 		<string>OpenSans-Semibold.ttf</string>
 		<string>OpenSans-SemiboldItalic.ttf</string>
 		<string>AntDesign.ttf</string>
@@ -75,14 +75,14 @@
 		<string>FontAwesome5_Brands.ttf</string>
 		<string>FontAwesome5_Regular.ttf</string>
 		<string>FontAwesome5_Solid.ttf</string>
-		<string>Fontisto.ttf</string>
 		<string>Foundation.ttf</string>
 		<string>Ionicons.ttf</string>
-		<string>MaterialCommunityIcons.ttf</string>
 		<string>MaterialIcons.ttf</string>
-		<string>Octicons.ttf</string>
+		<string>MaterialCommunityIcons.ttf</string>
 		<string>SimpleLineIcons.ttf</string>
+		<string>Octicons.ttf</string>
 		<string>Zocial.ttf</string>
+		<string>Fontisto.ttf</string>
 	</array>
 </dict>
 </plist>
