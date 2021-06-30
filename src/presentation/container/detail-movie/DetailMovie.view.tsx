@@ -3,12 +3,11 @@ import {View, Text, ScrollView} from 'react-native';
 import {styles} from './DetailMovie.styles';
 import {DetailMovieLogic} from './DetailMovie.logic';
 import {ARROW} from '@assets';
-import {IconImage} from '@components';
+import {FullScreenLoadingIndicator, IconImage} from '@components';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import moment from 'moment';
 import {parseMinuteToHour, translate} from '@helpers';
 import {Colors, Fonts} from '@resources';
 import {Cast, Gallery, VideoMovie, RelateMovie} from './modules';
@@ -25,10 +24,11 @@ export const DetailMovie = (props: any) => {
     galleryMovie,
     videoMovie,
     relateMovie,
+    loading,
   } = DetailMovieLogic(props);
-
   return (
     <View style={styles.container}>
+      <FullScreenLoadingIndicator visible={loading} />
       <IconImage
         source={{uri: uriBackDrop}}
         style={styles.fullSizeImg}
@@ -46,7 +46,7 @@ export const DetailMovie = (props: any) => {
       />
       <View style={[styles.viewCover, {height: heightBackDrop}]} />
       <View style={[styles.viewInfo, {height: hp(110) - heightBackDrop}]}>
-        <ScrollView>
+        <ScrollView showsVerticalScrollIndicator={false}>
           <Text style={styles.nameMovie}>{detailMovie?.title}</Text>
           {renderCate(detailMovie)}
           <View style={styles.viewCate}>

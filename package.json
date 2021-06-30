@@ -10,8 +10,8 @@
     "clean-android": "cd ./android && sh gradlew app:assembleDebug && sh gradlew installDebug",
     "clean": "cd ./android && sh gradlew clean",
     "open-debug-log": "adb shell input keyevent 82",
-    "upload-production": "",
-    "upload-staging": ""
+    "upload-production": "appcenter codepush release-react -a TruongGiang/Movie-Review-Android -d Production",
+    "upload-staging": "appcenter codepush release-react -a TruongGiang/Movie-Review-Android -d Staging"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.14.1",

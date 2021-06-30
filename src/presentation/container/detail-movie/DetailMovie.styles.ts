@@ -30,7 +30,7 @@ export const styles = StyleSheet.create({
   },
   viewInfo: {
     width: '100%',
-    backgroundColor: '#12223d',
+    backgroundColor: '#202630',
     position: 'absolute',
     bottom: 0,
     borderTopLeftRadius: wp(10),

@@ -18,6 +18,7 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
+import {isEmpty} from 'lodash';
 export const DetailMovieLogic = (props: any) => {
   const dispatch = useDispatch();
   const {
@@ -28,6 +29,7 @@ export const DetailMovieLogic = (props: any) => {
     relateMovie,
   } = useSelector(DetailMovieSelector);
   const idMovie = props?.route?.params?.idMovie;
+  const [loading, setLoading] = useState(true);
 
   const bodyDetailMovie: RequestMovieDetail = {
     movieID: idMovie,
@@ -44,8 +46,7 @@ export const DetailMovieLogic = (props: any) => {
     backDrop?.height < backDrop?.width
       ? backDrop?.height / backDrop?.width
       : backDrop?.width / backDrop?.height;
-  const heightBackDrop = wp(120) * (ratio || 1);
-
+  const heightBackDrop = wp(120) * (!!ratio ? ratio : 0.7);
   const year = !!detailMovie?.release_date
     ? moment(detailMovie?.release_date, 'yyyy-mm-dd').format('yyyy')
     : translate('coming_soon');
@@ -61,6 +62,18 @@ export const DetailMovieLogic = (props: any) => {
     dispatch(getRelate(bodyDetailMovie));
   }, [idMovie]);
 
+  useEffect(() => {
+    if (
+      !isEmpty(detailMovie) &&
+      !isEmpty(creditsMovie) &&
+      !isEmpty(galleryMovie) &&
+      !isEmpty(videoMovie) &&
+      !isEmpty(relateMovie)
+    ) {
+      setLoading(false);
+    }
+  }, [detailMovie, creditsMovie, galleryMovie, videoMovie, relateMovie]);
+
   const goBack = () => props?.navigation?.goBack();
 
   return {
@@ -75,5 +88,6 @@ export const DetailMovieLogic = (props: any) => {
     galleryMovie,
     videoMovie,
     relateMovie,
+    loading,
   };
 };

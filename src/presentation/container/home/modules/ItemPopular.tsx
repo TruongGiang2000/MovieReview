@@ -7,9 +7,11 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 export const ItemPopular = (props: any) => {
-  const {name, year, rating, poster, onPress} = props;
+  const {name, year, rating, poster, onPress, containerStyle} = props;
   return (
-    <TouchableOpacity style={styles.container} onPress={onPress}>
+    <TouchableOpacity
+      style={[styles.container, containerStyle]}
+      onPress={onPress}>
       <Image source={poster} style={styles.poster} />
       <Text style={styles.nameMovie} numberOfLines={2}>
         {name}
