@@ -4,6 +4,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import CodePush from 'react-native-code-push';
 import {App, Settings} from '@resources';
 import {
+  getListGenres,
   getPopular,
   getTopRating,
   getUpComing,
@@ -85,7 +86,7 @@ export const splashLogic = () => {
       dispatch(setSplashLoad());
     }
   }, [codePushSuccess]);
-  
+
   const dataGetMovie = {
     language: languageRequest(),
     page: 1,
@@ -94,6 +95,7 @@ export const splashLogic = () => {
     dispatch(getUpComing(dataGetMovie));
     dispatch(getPopular(dataGetMovie));
     dispatch(getTopRating(dataGetMovie));
+    dispatch(getListGenres(dataGetMovie));
   };
 
   return {

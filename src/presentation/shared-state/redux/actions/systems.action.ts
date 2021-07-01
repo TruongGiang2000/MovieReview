@@ -65,4 +65,10 @@ export const getRelateFail = createAction<RequestMovieDetail>(
   'systems/getRelateFail',
 );
 
+export const getListGenres = createAction<any>('systems/getListGenres');
+export const getListGenresSuccess = createAction<any>(
+  'systems/getListGenresSuccess',
+);
+export const getListGenresFail = createAction<any>('systems/getListGenresFail');
+
 export type SystemsEpicActions = any;

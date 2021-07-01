@@ -7,4 +7,5 @@ export enum AppDependencies {
   RemoteSystemsDataSource = 'RemoteSystemsDataSource',
   SystemsRepository = 'SystemsRepository',
   SystemsUseCase = 'SystemsUseCase',
+  ApiProviderBasic = 'ApiProviderBasic',
 }

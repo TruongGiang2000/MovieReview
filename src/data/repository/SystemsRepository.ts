@@ -37,4 +37,7 @@ export class CombineSystemsRepository implements SystemsRepository {
   getRelate(body: RequestMovieDetail): Observable<any> {
     return this.remoteDataSource.getRelate(body);
   }
+  getListGenres(body: any): Observable<any> {
+    return this.remoteDataSource.getListGenres(body);
+  }
 }

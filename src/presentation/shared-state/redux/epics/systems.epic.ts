@@ -29,8 +29,10 @@ import {
   getVideoFail,
   getRelate,
   getRelateSuccess,
-  getRealteFail,
   getRelateFail,
+  getListGenres,
+  getListGenresSuccess,
+  getListGenresFail,
 } from '../actions';
 import {SystemUseCase} from '@domain';
 const getUpComingEpic$ = (actions$: any) =>
@@ -143,6 +145,20 @@ const getRelateMovie$ = (action$: any) =>
       );
     }),
   );
+
+const getListGeneres$ = (action$: any) =>
+  action$.pipe(
+    filter(getListGenres.match),
+    switchMap((action: any) => {
+      let useCase = container.resolve<SystemUseCase>(
+        AppDependencies.SystemsUseCase,
+      );
+      return useCase.getListGenres(action?.payload).pipe(
+        map(getListGenresSuccess),
+        catchError((error) => of(getListGenresFail(error))),
+      );
+    }),
+  );
 export const systemsEpic = combineEpics(
   getUpComingEpic$,
   getPopularEpic$,
@@ -152,4 +168,5 @@ export const systemsEpic = combineEpics(
   getCreditsMovieEpic$,
   getVideoMovie$,
   getRelateMovie$,
+  getListGeneres$,
 );

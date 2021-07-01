@@ -20,6 +20,8 @@ export class ApiSystemsDataSource implements RemoteSystemsDataSource {
   constructor(
     @inject('ApiProvider')
     private readonly provider: RxRemoteProvider,
+    @inject('ApiProviderBasic')
+    private readonly providerBasic: RxRemoteProvider,
   ) {}
   getUpComing(body: any): Observable<any> {
     return this.provider
@@ -60,5 +62,8 @@ export class ApiSystemsDataSource implements RemoteSystemsDataSource {
     return this.provider
       .get(`${body?.movieID}/recommendations`, configApiKey(body))
       .pipe(map((response) => response.data));
+  }
+  getListGenres(body: any): Observable<any> {
+    return this.providerBasic.get('genre/movie/list', configApiKey(body));
   }
 }

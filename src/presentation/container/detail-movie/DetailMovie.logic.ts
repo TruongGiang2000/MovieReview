@@ -5,6 +5,7 @@ import {
   getCredits,
   getDetailMovie,
   getGalleryMovie,
+  getListGenres,
   getRelate,
   getVideo,
 } from '@shared-state';

@@ -15,4 +15,9 @@ export function registerDataDependencies() {
   container.register(AppDependencies.RemoteSystemsDataSource, {
     useClass: ApiSystemsDataSource,
   });
+  container.register(AppDependencies.ApiProviderBasic, {
+    useValue: new BearerAuthorizationRxAxiosProvider({
+      baseURL: BuildConfig.ApiUriBasic,
+    }),
+  });
 }

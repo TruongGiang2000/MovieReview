@@ -49,4 +49,9 @@ export class SystemUseCase {
       .getRelate(body)
       .pipe(mergeMap((result: any) => of(result)));
   }
+  getListGenres(body: any): Observable<any> {
+    return this.systemRepository
+      .getListGenres(body)
+      .pipe(mergeMap((result) => of(result)));
+  }
 }
