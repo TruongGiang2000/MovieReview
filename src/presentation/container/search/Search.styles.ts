@@ -20,7 +20,6 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    flex: 1,
   },
   iconSearchContainer: {
     width: wp(10),
@@ -29,5 +28,9 @@ export const styles = StyleSheet.create({
     backgroundColor: '#f23e51',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  viewRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 });
