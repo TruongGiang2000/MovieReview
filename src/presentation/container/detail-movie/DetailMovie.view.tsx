@@ -57,7 +57,9 @@ export const DetailMovie = (props: any) => {
             </Text>
           </View>
           <Text style={styles.txtTitleGeneral}>{translate('over_view')}</Text>
-          <Text style={styles.txtContentGeneral}>{detailMovie?.overview}</Text>
+          <Text style={styles.txtContentGeneral}>
+            {detailMovie?.overview || `${translate('updating')}.`}
+          </Text>
           <Text style={styles.txtTitleGeneral}>{translate('cast')}</Text>
           <Cast data={creditsMovie?.cast} />
           <Text style={styles.txtTitleGeneral}> {translate('gallery')}</Text>

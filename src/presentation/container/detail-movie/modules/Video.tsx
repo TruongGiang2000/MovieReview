@@ -1,6 +1,6 @@
-import {App} from '@resources';
+import {App, Fonts} from '@resources';
 import React from 'react';
-import {FlatList, StyleSheet} from 'react-native';
+import {FlatList, StyleSheet, Text} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {
   widthPercentageToDP as wp,
@@ -9,6 +9,7 @@ import {
 import Video from 'react-native-video';
 import {Thumbnail} from 'react-native-thumbnail-video';
 import lodash from 'lodash';
+import {translate} from '@helpers';
 export const VideoMovie = (props: any) => {
   const {data} = props;
 
@@ -27,14 +28,16 @@ export const VideoMovie = (props: any) => {
       />
     );
   };
-  if (lodash.isEmpty(data)) return null;
-  return (
+
+  return !lodash.isEmpty(data) ? (
     <FlatList
       data={data}
       renderItem={renderItem}
       horizontal={true}
       contentContainerStyle={styles.flatListContainer}
     />
+  ) : (
+    <Text style={styles.txtContentGeneral}>{`${translate('updating')}.`}</Text>
   );
 };
 const styles = StyleSheet.create({
@@ -43,5 +46,13 @@ const styles = StyleSheet.create({
   },
   flatListContainer: {
     marginTop: hp(2),
+  },
+  txtContentGeneral: {
+    color: '#fff',
+    fontSize: wp(3),
+    fontFamily: Fonts.OpenSans_Light,
+    marginTop: hp(0.5),
+    opacity: 0.9,
+    marginLeft: wp(1.5),
   },
 });

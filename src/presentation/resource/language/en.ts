@@ -14,4 +14,5 @@ export default {
   gallery: 'Gallery',
   trailer: 'Trailers',
   relate: 'Maybe you like',
+  updating: 'Updating',
 };

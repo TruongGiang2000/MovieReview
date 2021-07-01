@@ -1,11 +1,15 @@
 import React from 'react';
-import {FlatList} from 'react-native';
+import {FlatList, Text} from 'react-native';
 import {ItemPopular} from '../../home/modules';
 import moment from 'moment';
 import {translate} from '@helpers';
-import {App} from '@resources';
+import {App, Fonts} from '@resources';
 import {StyleSheet} from 'react-native';
-import {heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import {
+  heightPercentageToDP as hp,
+  widthPercentageToDP as wp,
+} from 'react-native-responsive-screen';
+import lodash from 'lodash';
 export const RelateMovie = (props: any) => {
   const {data, navigation} = props;
   const renderItem = ({item}: any) => {
@@ -25,7 +29,7 @@ export const RelateMovie = (props: any) => {
       />
     );
   };
-  return (
+  return !lodash.isEmpty(data) ? (
     <FlatList
       data={data}
       renderItem={renderItem}
@@ -33,10 +37,20 @@ export const RelateMovie = (props: any) => {
       scrollEnabled={false}
       contentContainerStyle={styles.containerFlatlist}
     />
+  ) : (
+    <Text style={styles.txtContentGeneral}>{`${translate('updating')}.`}</Text>
   );
 };
 const styles = StyleSheet.create({
   containerFlatlist: {
     marginTop: hp(2),
+  },
+  txtContentGeneral: {
+    color: '#fff',
+    fontSize: wp(3),
+    fontFamily: Fonts.OpenSans_Light,
+    marginTop: hp(0.5),
+    opacity: 0.9,
+    marginLeft: wp(1.5),
   },
 });

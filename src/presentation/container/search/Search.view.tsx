@@ -3,14 +3,22 @@ import {View, Text} from 'react-native';
 import {styles} from './Search.styles';
 import {SearchProps} from './types';
 import {SearchLogic} from './Search.logic';
-import {DetailMovie} from '../detail-movie';
+import {TextInput} from 'react-native-gesture-handler';
+import {IconImage} from '@components';
+import {SEARCH_ICON} from '@assets';
 export const Search: React.FC<SearchProps> = (props) => {
   const {} = props;
   const {} = SearchLogic();
   return (
-    // <View style={styles.container}>
-    //   <Text>Search</Text>
-    // </View>
-    <DetailMovie navigation={props?.navigation} route={props?.route} />
+    <View style={styles.container}>
+      <View style={styles.searchContainer}>
+        <TextInput placeholder={'Search...'} />
+        <IconImage
+          source={SEARCH_ICON}
+          containerStyle={styles.iconSearchContainer}
+          isTouch={true}
+        />
+      </View>
+    </View>
   );
 };

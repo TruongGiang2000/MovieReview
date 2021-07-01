@@ -4,5 +4,7 @@ export const ICON_EN = require('./iconEn.png');
 export const POSTER = require('./posterFilm.jpg');
 export const BACK_DROP = require('./backDrop.jpeg');
 export const ARROW = require('./arrow.png');
+export const SEARCH_ICON = require('./searchIcon.png');
+export const FILTER_ICON = require('./filterIcon.png');
 export * from './svg';
 export * from './bottomNavigation';

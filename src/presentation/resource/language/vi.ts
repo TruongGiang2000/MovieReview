@@ -14,4 +14,5 @@ export default {
   gallery: 'Thư viện',
   trailer: 'Giới thiệu',
   relate: 'Có thể bạn sẽ thích',
+  updating: 'Đang cập nhật',
 };
