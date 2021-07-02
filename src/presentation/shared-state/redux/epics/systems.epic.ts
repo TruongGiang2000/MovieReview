@@ -33,6 +33,11 @@ import {
   getListGenres,
   getListGenresSuccess,
   getListGenresFail,
+  getListCountries,
+  getListCountriesSuccess,
+  getListCountriesFail,
+  getFilterMovieSuccess,
+  getFilterMovieFail,
 } from '../actions';
 import {SystemUseCase} from '@domain';
 const getUpComingEpic$ = (actions$: any) =>
@@ -159,6 +164,34 @@ const getListGeneres$ = (action$: any) =>
       );
     }),
   );
+
+const getListCountries$ = (action$: any) =>
+  action$.pipe(
+    filter(getListCountries.match),
+    switchMap((action: any) => {
+      let useCase = container.resolve<SystemUseCase>(
+        AppDependencies.SystemsUseCase,
+      );
+      return useCase.getListCountries().pipe(
+        map(getListCountriesSuccess),
+        catchError((error) => of(getListCountriesFail(error))),
+      );
+    }),
+  );
+
+const getFilterMovie$ = (action$: any) =>
+  action$.pipe(
+    filter(getListCountries.match),
+    switchMap((action: any) => {
+      let useCase = container.resolve<SystemUseCase>(
+        AppDependencies.SystemsUseCase,
+      );
+      return useCase.getFilterMovie(action?.payload).pipe(
+        map(getFilterMovieSuccess),
+        catchError((error) => of(getFilterMovieFail(error))),
+      );
+    }),
+  );
 export const systemsEpic = combineEpics(
   getUpComingEpic$,
   getPopularEpic$,
@@ -169,4 +202,6 @@ export const systemsEpic = combineEpics(
   getVideoMovie$,
   getRelateMovie$,
   getListGeneres$,
+  getListCountries$,
+  getFilterMovie$,
 );

@@ -54,4 +54,14 @@ export class SystemUseCase {
       .getListGenres(body)
       .pipe(mergeMap((result) => of(result)));
   }
+  getListCountries(): Observable<any> {
+    return this.systemRepository
+      .getListCountries()
+      .pipe(mergeMap((result) => of(result)));
+  }
+  getFilterMovie(body: any): Observable<any> {
+    return this.systemRepository
+      .getFilterMovie(body)
+      .pipe(mergeMap((result) => of(result)));
+  }
 }

@@ -21,6 +21,10 @@ import {
   getRelateSuccess,
   getListGenres,
   getListGenresSuccess,
+  getListCountries,
+  getListCountriesSuccess,
+  getFilterMovie,
+  getFilterMovieSuccess,
 } from '../actions';
 
 export type ModeType = 'production' | 'staging';
@@ -37,6 +41,8 @@ export type SystemState = {
   videoMovie: any;
   relateMovie: any;
   movieGenres: any;
+  listCountries: any;
+  filterMovie: any;
 };
 const INITIAL_STATE: SystemState = {
   language: 'vi',
@@ -51,6 +57,8 @@ const INITIAL_STATE: SystemState = {
   videoMovie: undefined,
   relateMovie: undefined,
   movieGenres: undefined,
+  listCountries: undefined,
+  filterMovie: undefined,
 };
 export const systemsReducer = createReducer(INITIAL_STATE, (builder) =>
   builder
@@ -114,5 +122,17 @@ export const systemsReducer = createReducer(INITIAL_STATE, (builder) =>
     )
     .addCase(getListGenresSuccess, (state, action) =>
       Object.assign(state, {movieGenres: action.payload?.data}),
+    )
+    .addCase(getListCountries, (state) =>
+      Object.assign(state, {listCountries: undefined}),
+    )
+    .addCase(getListCountriesSuccess, (state, action) =>
+      Object.assign(state, {listCountries: action.payload}),
+    )
+    .addCase(getFilterMovie, (state) =>
+      Object.assign(state, {filterMovie: undefined}),
+    )
+    .addCase(getFilterMovieSuccess, (state, action) =>
+      Object.assign(state, {filterMovie: action.payload}),
     ),
 );

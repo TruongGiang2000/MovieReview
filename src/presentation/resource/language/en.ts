@@ -15,4 +15,6 @@ export default {
   trailer: 'Trailers',
   relate: 'Maybe you like',
   updating: 'Updating',
+  search: 'Search',
+  genres: 'Genres',
 };

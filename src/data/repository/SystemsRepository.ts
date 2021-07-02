@@ -40,4 +40,10 @@ export class CombineSystemsRepository implements SystemsRepository {
   getListGenres(body: any): Observable<any> {
     return this.remoteDataSource.getListGenres(body);
   }
+  getListCountries(): Observable<any> {
+    return this.remoteDataSource.getListCountries();
+  }
+  getFilterMovie(body: any): Observable<any> {
+    return this.remoteDataSource.getFilterMovie(body);
+  }
 }

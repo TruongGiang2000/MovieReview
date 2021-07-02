@@ -15,4 +15,6 @@ export default {
   trailer: 'Giới thiệu',
   relate: 'Có thể bạn sẽ thích',
   updating: 'Đang cập nhật',
+  search: 'Tìm kiếm',
+  genres: 'Thể loại',
 };

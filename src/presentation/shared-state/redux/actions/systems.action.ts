@@ -71,4 +71,19 @@ export const getListGenresSuccess = createAction<any>(
 );
 export const getListGenresFail = createAction<any>('systems/getListGenresFail');
 
+export const getListCountries = createAction('systems/getListCountries');
+export const getListCountriesSuccess = createAction<any>(
+  'systems/getListCountriesSuccess',
+);
+export const getListCountriesFail = createAction<any>(
+  'systems/getListCountriesFail',
+);
+
+export const getFilterMovie = createAction<any>('systems/getFilterMovie');
+export const getFilterMovieSuccess = createAction<any>(
+  'systems/getFilterMovieSuccess',
+);
+export const getFilterMovieFail = createAction<any>(
+  'systems/getFilterMovieFail',
+);
 export type SystemsEpicActions = any;

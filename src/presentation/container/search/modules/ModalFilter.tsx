@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   StyleSheet,
   View,
@@ -6,7 +6,7 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-import {Modal} from '@components';
+import {IconImage, Modal} from '@components';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -14,28 +14,57 @@ import {
 import {Fonts} from '@resources';
 import {useSelector} from 'react-redux';
 import {RootStoreState} from '@shared-state';
+import LinearGradient from 'react-native-linear-gradient';
+import {translate} from '@helpers';
 export const ModalFilter = (props: any) => {
   const {movieGenres} = useSelector((state: RootStoreState) => ({
     movieGenres: state.systems.movieGenres,
   }));
+  const {showModal, onRequestClose} = props;
+  const [activeArray, setActiveArray] = useState<any[]>([]);
+
+  const onPressGenres = (id: string) => () => {
+    const indexActive = activeArray?.findIndex((it) => it == id);
+    if (indexActive != -1) {
+      setActiveArray((preState) => {
+        preState.splice(indexActive, 1);
+        return [...preState];
+      });
+      return;
+    }
+    setActiveArray((preState) => preState.concat(id));
+  };
   return (
-    <Modal isOpen={true} position={'bottom'} hasBackdrop={true}>
+    <Modal
+      isOpen={showModal}
+      position={'bottom'}
+      onRequestClose={onRequestClose}>
       <View style={styles.containerView}>
         <ScrollView>
-          <Text style={styles.txtTitleGeneral}>Genres</Text>
-          <View
-            style={{
-              flexDirection: 'row',
-              flexWrap: 'wrap',
-              alignItems: 'center',
-              justifyContent: 'center',
-              marginTop: hp(1),
-            }}>
-            {movieGenres?.genres?.map((it: any) => (
-              <TouchableOpacity style={styles.btnContainer}>
-                <Text style={styles.txtGeneres}>{it?.name}</Text>
-              </TouchableOpacity>
-            ))}
+          <Text style={styles.txtTitleGeneral}>{translate('genres')}</Text>
+          <View style={styles.genresContainer}>
+            {movieGenres?.genres?.map((it: any) => {
+              const isActive = activeArray?.some((itAc) => itAc == it?.id);
+              return (
+                <LinearGradient
+                  colors={
+                    isActive
+                      ? ['#FC466B', '#3F5EFB']
+                      : ['transparent', 'transparent']
+                  }
+                  useAngle={true}
+                  angle={90}
+                  style={styles.btnContainer}
+                  key={it?.id}>
+                  <TouchableOpacity
+                    style={styles.btnStyle}
+                    onPress={onPressGenres(it?.id)}
+                    activeOpacity={0.7}>
+                    <Text style={styles.txtGeneres}>{it?.name}</Text>
+                  </TouchableOpacity>
+                </LinearGradient>
+              );
+            })}
           </View>
         </ScrollView>
       </View>
@@ -53,7 +82,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#202630',
   },
   txtTitleGeneral: {
-    fontFamily: Fonts.Open_Sans_Semibold,
+    fontFamily: Fonts.Open_Sans_Bold,
     color: '#fff',
     fontSize: wp(4),
     marginTop: hp(2),
@@ -64,12 +93,17 @@ const styles = StyleSheet.create({
     fontSize: wp(3),
   },
   btnContainer: {
-    paddingVertical: hp(1),
-    margin: wp(2),
     borderWidth: 1,
     borderColor: '#fff',
     borderRadius: wp(4),
-    alignItems: 'center',
-    paddingHorizontal: wp(2),
+    margin: wp(1),
   },
+  genresContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: hp(1),
+  },
+  btnStyle: {paddingVertical: hp(1), paddingHorizontal: wp(2)},
 });

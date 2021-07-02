@@ -7,14 +7,18 @@ import {TextInput} from 'react-native-gesture-handler';
 import {IconImage} from '@components';
 import {FILTER_ICON, SEARCH_ICON} from '@assets';
 import {ModalFilter} from './modules';
+import {translate} from '@helpers';
 export const Search: React.FC<SearchProps> = (props) => {
   const {} = props;
-  const {} = SearchLogic();
+  const {showModal, showModalFun, hideModalFun} = SearchLogic();
   return (
     <View style={styles.container}>
       <View style={styles.viewRow}>
         <View style={styles.searchContainer}>
-          <TextInput placeholder={'Search...'} placeholderTextColor={'#fff'} />
+          <TextInput
+            placeholder={`${translate('search')}...`}
+            placeholderTextColor={'#fff'}
+          />
           <IconImage
             source={SEARCH_ICON}
             containerStyle={styles.iconSearchContainer}
@@ -28,9 +32,10 @@ export const Search: React.FC<SearchProps> = (props) => {
           isTouch={true}
           style={styles.iconFilter}
           resizeMode={'contain'}
+          onPress={showModalFun}
         />
       </View>
-      <ModalFilter />
+      <ModalFilter showModal={showModal} onRequestClose={hideModalFun} />
     </View>
   );
 };

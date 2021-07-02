@@ -66,4 +66,10 @@ export class ApiSystemsDataSource implements RemoteSystemsDataSource {
   getListGenres(body: any): Observable<any> {
     return this.providerBasic.get('genre/movie/list', configApiKey(body));
   }
+  getListCountries(): Observable<any> {
+    return this.providerBasic.get('configuration/countries', configApiKey({}));
+  }
+  getFilterMovie(body: any): Observable<any> {
+    return this.providerBasic.get('discover/movie', configApiKey(body));
+  }
 }

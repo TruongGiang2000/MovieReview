@@ -12,4 +12,6 @@ export interface SystemsRepository {
   getVideo(body: RequestMovieDetail): Observable<any>;
   getRelate(body: RequestMovieDetail): Observable<any>;
   getListGenres(body: any): Observable<any>;
+  getListCountries(): Observable<any>;
+  getFilterMovie(body: any): Observable<any>;
 }
