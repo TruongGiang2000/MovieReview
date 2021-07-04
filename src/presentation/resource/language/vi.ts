@@ -17,4 +17,6 @@ export default {
   updating: 'Đang cập nhật',
   search: 'Tìm kiếm',
   genres: 'Thể loại',
+  year: 'Năm',
+  region: 'Quốc gia',
 };

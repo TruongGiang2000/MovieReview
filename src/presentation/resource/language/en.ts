@@ -17,4 +17,6 @@ export default {
   updating: 'Updating',
   search: 'Search',
   genres: 'Genres',
+  year: 'Year',
+  region: 'Region',
 };

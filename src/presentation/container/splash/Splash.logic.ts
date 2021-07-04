@@ -78,7 +78,7 @@ export const splashLogic = () => {
 
   React.useEffect(() => {
     if (
-      codePushSuccess &&
+      // codePushSuccess &&
       !isEmpty(upComingMovie) &&
       !isEmpty(popularMovie) &&
       !isEmpty(topRatingMovie)

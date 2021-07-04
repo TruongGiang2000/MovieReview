@@ -1,12 +1,13 @@
-import React, {useState} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import {
   StyleSheet,
   View,
   Text,
   ScrollView,
   TouchableOpacity,
+  FlatList,
 } from 'react-native';
-import {IconImage, Modal} from '@components';
+import {Modal} from '@components';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -16,13 +17,23 @@ import {useSelector} from 'react-redux';
 import {RootStoreState} from '@shared-state';
 import LinearGradient from 'react-native-linear-gradient';
 import {translate} from '@helpers';
+import moment from 'moment';
+import lodash from 'lodash';
 export const ModalFilter = (props: any) => {
   const {movieGenres} = useSelector((state: RootStoreState) => ({
     movieGenres: state.systems.movieGenres,
   }));
-  const {showModal, onRequestClose} = props;
-  const [activeArray, setActiveArray] = useState<any[]>([]);
+  const dataFilter = ['genres', 'year', 'region'];
 
+  const {showModal, onRequestClose} = props;
+  const refFlatList = useRef<any>();
+  const refScrollView = useRef<any>();
+  const [itemFocus, setItemFocus] = useState<number>(
+    +moment().format('yyyy') - 1899,
+  );
+  const [activeArray, setActiveArray] = useState<any[]>([]);
+  const [isActiveItem, setIsActiveItem] = useState<number>(0);
+  const numberYears = lodash.range(+moment().format('yyyy') - 1899);
   const onPressGenres = (id: string) => () => {
     const indexActive = activeArray?.findIndex((it) => it == id);
     if (indexActive != -1) {
@@ -34,14 +45,29 @@ export const ModalFilter = (props: any) => {
     }
     setActiveArray((preState) => preState.concat(id));
   };
-  return (
-    <Modal
-      isOpen={showModal}
-      position={'bottom'}
-      onRequestClose={onRequestClose}>
-      <View style={styles.containerView}>
-        <ScrollView>
-          <Text style={styles.txtTitleGeneral}>{translate('genres')}</Text>
+
+  const chooseFilterCate = (index: number) => () => {
+    setIsActiveItem(index);
+    refFlatList.current?.scrollToIndex({index, animated: true});
+    refScrollView.current?.scrollTo({x: 0, y: 0, animated: true});
+  };
+
+  const renderYear = ({item}: any) => {
+    return (
+      <Text style={styles.txtYearChoose} key={item?.toString()}>
+        {+item + 1900}
+      </Text>
+    );
+  };
+
+  useEffect(() => {
+    !!showModal && setIsActiveItem(0);
+  }, [showModal]);
+
+  const renderItem = ({item, index}: any) => {
+    switch (index) {
+      case 0:
+        return (
           <View style={styles.genresContainer}>
             {movieGenres?.genres?.map((it: any) => {
               const isActive = activeArray?.some((itAc) => itAc == it?.id);
@@ -66,7 +92,92 @@ export const ModalFilter = (props: any) => {
               );
             })}
           </View>
+        );
+      case 1:
+        return (
+          <View
+            style={{
+              width: wp(90),
+              marginRight: wp(5),
+            }}>
+            <FlatList
+              data={numberYears}
+              renderItem={renderYear}
+              style={{marginVertical: hp(3)}}
+              // onLayout={({nativeEvent}) =>
+              // }
+            />
+          </View>
+        );
+      case 2:
+        return (
+          <View style={{width: wp(100)}}>
+            <Text>aloaloalo</Text>
+          </View>
+        );
+      default:
+        return <></>;
+    }
+  };
+
+  const getHeightItem = () => {
+    switch (isActiveItem) {
+      case 0:
+        return {height: hp(55)};
+      case 1:
+        return {};
+      case 2:
+        return {};
+      default:
+        return {};
+    }
+  };
+  return (
+    <Modal
+      isOpen={showModal}
+      hasBackdrop={true}
+      position={'bottom'}
+      pressOutSideClose={true}
+      onRequestClose={onRequestClose}>
+      <View style={styles.containerView}>
+        <View style={styles.viewRow}>
+          {dataFilter?.map((it, index) => {
+            const isActiveScreen = index == isActiveItem;
+            return (
+              <LinearGradient
+                colors={
+                  isActiveScreen
+                    ? ['#ec881c', '#ec881c']
+                    : ['transparent', 'transparent']
+                }
+                useAngle={true}
+                angle={45}
+                style={styles.linearContainer}
+                key={index?.toString()}>
+                <TouchableOpacity
+                  style={styles.btnFilter}
+                  onPress={chooseFilterCate(index)}>
+                  <Text style={styles.txtTitleGeneral}>{translate(it)}</Text>
+                </TouchableOpacity>
+              </LinearGradient>
+            );
+          })}
+        </View>
+        <ScrollView showsVerticalScrollIndicator={false} ref={refScrollView}>
+          <FlatList
+            ref={refFlatList}
+            data={dataFilter}
+            renderItem={renderItem}
+            horizontal={true}
+            keyExtractor={(item, index) => index.toString()}
+            showsHorizontalScrollIndicator={false}
+            scrollEnabled={false}
+            contentContainerStyle={getHeightItem()}
+          />
         </ScrollView>
+        <TouchableOpacity style={styles.btnConfirm}>
+          <Text style={styles.txtConfirm}>Xác nhận</Text>
+        </TouchableOpacity>
       </View>
     </Modal>
   );
@@ -78,14 +189,13 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: wp(10),
     borderTopRightRadius: wp(10),
     paddingHorizontal: wp(4),
-    paddingBottom: hp(2),
+    paddingVertical: hp(2),
     backgroundColor: '#202630',
   },
   txtTitleGeneral: {
     fontFamily: Fonts.Open_Sans_Bold,
     color: '#fff',
-    fontSize: wp(4),
-    marginTop: hp(2),
+    fontSize: wp(3.2),
   },
   txtGeneres: {
     fontFamily: Fonts.Open_Sans_Regular,
@@ -103,7 +213,48 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: hp(1),
+    paddingVertical: hp(3),
+    width: wp(90),
+    marginRight: wp(5),
   },
-  btnStyle: {paddingVertical: hp(1), paddingHorizontal: wp(2)},
+  btnStyle: {paddingVertical: hp(1.3), paddingHorizontal: wp(3)},
+  viewRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    width: '90%',
+    alignSelf: 'center',
+  },
+  btnFilter: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    flex: 1,
+  },
+  linearContainer: {
+    width: wp(24),
+    height: hp(5),
+    borderRadius: wp(5),
+    borderWidth: 1,
+    borderColor: '#fff',
+  },
+  btnConfirm: {
+    alignSelf: 'center',
+    paddingVertical: hp(2),
+    backgroundColor: '#f23e51',
+    borderRadius: wp(2),
+    width: '95%',
+    alignItems: 'center',
+  },
+  txtConfirm: {
+    color: '#fff',
+    fontFamily: Fonts.Open_Sans_Bold,
+    fontSize: wp(3),
+  },
+  txtYearChoose: {
+    color: '#fff',
+    fontFamily: Fonts.Open_Sans_Semibold,
+    fontSize: wp(5),
+    marginBottom: hp(1),
+    alignSelf: 'center',
+  },
 });
