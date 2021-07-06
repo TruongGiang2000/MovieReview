@@ -104,8 +104,7 @@ export const ModalFilter = (props: any) => {
               data={numberYears}
               renderItem={renderYear}
               style={{marginVertical: hp(3)}}
-              // onLayout={({nativeEvent}) =>
-              // }
+              showsVerticalScrollIndicator={false}
             />
           </View>
         );
@@ -125,7 +124,7 @@ export const ModalFilter = (props: any) => {
       case 0:
         return {height: hp(55)};
       case 1:
-        return {};
+        return {height: hp(100)};
       case 2:
         return {};
       default:
