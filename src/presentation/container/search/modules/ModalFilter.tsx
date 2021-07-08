@@ -19,6 +19,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import {translate} from '@helpers';
 import moment from 'moment';
 import lodash from 'lodash';
+import AutoComplete from 'react-native-autocomplete-input';
 export const ModalFilter = (props: any) => {
   const {movieGenres} = useSelector((state: RootStoreState) => ({
     movieGenres: state.systems.movieGenres,
@@ -27,10 +28,9 @@ export const ModalFilter = (props: any) => {
 
   const {showModal, onRequestClose} = props;
   const refFlatList = useRef<any>();
+  const refFlatListYear = useRef<any>();
   const refScrollView = useRef<any>();
-  const [itemFocus, setItemFocus] = useState<number>(
-    +moment().format('yyyy') - 1899,
-  );
+  const [itemFocus, setItemFocus] = useState<number>(+moment().format('yyyy'));
   const [activeArray, setActiveArray] = useState<any[]>([]);
   const [isActiveItem, setIsActiveItem] = useState<number>(0);
   const numberYears = lodash.range(+moment().format('yyyy') - 1899);
@@ -53,15 +53,24 @@ export const ModalFilter = (props: any) => {
   };
 
   const renderYear = ({item}: any) => {
+    const year = +item + 1900;
+    const itemActive = itemFocus == year;
     return (
-      <Text style={styles.txtYearChoose} key={item?.toString()}>
-        {+item + 1900}
+      <Text
+        onPress={() => setItemFocus(year)}
+        style={[styles.txtYearChoose, itemActive && styles.itemActive]}
+        key={item?.toString()}>
+        {year}
       </Text>
     );
   };
 
   useEffect(() => {
-    !!showModal && setIsActiveItem(0);
+    if (!!showModal) {
+      setIsActiveItem(0);
+      setItemFocus(+moment().format('yyyy'));
+      setActiveArray([]);
+    }
   }, [showModal]);
 
   const renderItem = ({item, index}: any) => {
@@ -101,17 +110,18 @@ export const ModalFilter = (props: any) => {
               marginRight: wp(5),
             }}>
             <FlatList
-              data={numberYears}
+              data={numberYears?.reverse()}
               renderItem={renderYear}
               style={{marginVertical: hp(3)}}
               showsVerticalScrollIndicator={false}
+              ref={refFlatListYear}
             />
           </View>
         );
       case 2:
         return (
-          <View style={{width: wp(100)}}>
-            <Text>aloaloalo</Text>
+          <View style={{width: wp(100), marginTop: hp(3)}}>
+            <AutoComplete />
           </View>
         );
       default:
@@ -124,7 +134,7 @@ export const ModalFilter = (props: any) => {
       case 0:
         return {height: hp(55)};
       case 1:
-        return {height: hp(100)};
+        return {};
       case 2:
         return {};
       default:
@@ -162,18 +172,16 @@ export const ModalFilter = (props: any) => {
             );
           })}
         </View>
-        <ScrollView showsVerticalScrollIndicator={false} ref={refScrollView}>
-          <FlatList
-            ref={refFlatList}
-            data={dataFilter}
-            renderItem={renderItem}
-            horizontal={true}
-            keyExtractor={(item, index) => index.toString()}
-            showsHorizontalScrollIndicator={false}
-            scrollEnabled={false}
-            contentContainerStyle={getHeightItem()}
-          />
-        </ScrollView>
+        <FlatList
+          ref={refFlatList}
+          data={dataFilter}
+          renderItem={renderItem}
+          horizontal={true}
+          keyExtractor={(item, index) => index.toString()}
+          showsHorizontalScrollIndicator={false}
+          scrollEnabled={false}
+          contentContainerStyle={getHeightItem()}
+        />
         <TouchableOpacity style={styles.btnConfirm}>
           <Text style={styles.txtConfirm}>Xác nhận</Text>
         </TouchableOpacity>
@@ -254,6 +262,13 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.Open_Sans_Semibold,
     fontSize: wp(5),
     marginBottom: hp(1),
-    alignSelf: 'center',
+    textAlign: 'center',
+    width: '100%',
+  },
+  itemActive: {
+    backgroundColor: '#ffffff4a',
+    borderWidth: 1,
+    borderColor: '#fff',
+    borderRadius: wp(1),
   },
 });
