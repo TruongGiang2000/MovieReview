@@ -38,6 +38,7 @@ import {
   getListCountriesFail,
   getFilterMovieSuccess,
   getFilterMovieFail,
+  getFilterMovie,
 } from '../actions';
 import {SystemUseCase} from '@domain';
 const getUpComingEpic$ = (actions$: any) =>
@@ -181,7 +182,7 @@ const getListCountries$ = (action$: any) =>
 
 const getFilterMovie$ = (action$: any) =>
   action$.pipe(
-    filter(getListCountries.match),
+    filter(getFilterMovie.match),
     switchMap((action: any) => {
       let useCase = container.resolve<SystemUseCase>(
         AppDependencies.SystemsUseCase,

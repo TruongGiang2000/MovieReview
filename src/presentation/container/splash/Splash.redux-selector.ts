@@ -12,5 +12,6 @@ export const splashSelector: Selector<
     upComingMovie: state.systems.upComingMovie,
     popularMovie: state.systems.popularMovie,
     topRatingMovie: state.systems.topRatingMovie,
+    listCountries: state.systems.listCountries,
   };
 };

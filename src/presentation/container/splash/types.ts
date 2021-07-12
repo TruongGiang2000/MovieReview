@@ -17,4 +17,5 @@ export type SplashReduxSelectionState = {
   upComingMovie: any;
   popularMovie: any;
   topRatingMovie: any;
+  listCountries: any;
 };

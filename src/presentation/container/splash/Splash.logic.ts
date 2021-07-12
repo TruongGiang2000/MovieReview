@@ -4,6 +4,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import CodePush from 'react-native-code-push';
 import {App, Settings} from '@resources';
 import {
+  getListCountries,
   getListGenres,
   getPopular,
   getTopRating,
@@ -20,6 +21,7 @@ export const splashLogic = () => {
     popularMovie,
     topRatingMovie,
     upComingMovie,
+    listCountries,
   } = useSelector(splashSelector);
   const [label, setLabel] = React.useState('');
   const [codePushSuccess, setCodePushSuccess] = React.useState(false);
@@ -81,7 +83,8 @@ export const splashLogic = () => {
       // codePushSuccess &&
       !isEmpty(upComingMovie) &&
       !isEmpty(popularMovie) &&
-      !isEmpty(topRatingMovie)
+      !isEmpty(topRatingMovie) &&
+      !isEmpty(listCountries)
     ) {
       dispatch(setSplashLoad());
     }
@@ -96,6 +99,7 @@ export const splashLogic = () => {
     dispatch(getPopular(dataGetMovie));
     dispatch(getTopRating(dataGetMovie));
     dispatch(getListGenres(dataGetMovie));
+    dispatch(getListCountries());
   };
 
   return {

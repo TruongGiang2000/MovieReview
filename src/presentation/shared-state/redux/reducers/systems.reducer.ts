@@ -121,13 +121,13 @@ export const systemsReducer = createReducer(INITIAL_STATE, (builder) =>
       Object.assign(state, {movieGenres: undefined}),
     )
     .addCase(getListGenresSuccess, (state, action) =>
-      Object.assign(state, {movieGenres: action.payload?.data}),
+      Object.assign(state, {movieGenres: action.payload?.data?.genres}),
     )
     .addCase(getListCountries, (state) =>
       Object.assign(state, {listCountries: undefined}),
     )
     .addCase(getListCountriesSuccess, (state, action) =>
-      Object.assign(state, {listCountries: action.payload}),
+      Object.assign(state, {listCountries: action.payload?.data}),
     )
     .addCase(getFilterMovie, (state) =>
       Object.assign(state, {filterMovie: undefined}),

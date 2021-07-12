@@ -21,11 +21,11 @@ import moment from 'moment';
 import lodash from 'lodash';
 import AutoComplete from 'react-native-autocomplete-input';
 export const ModalFilter = (props: any) => {
-  const {movieGenres} = useSelector((state: RootStoreState) => ({
+  const {movieGenres, listCountries} = useSelector((state: RootStoreState) => ({
     movieGenres: state.systems.movieGenres,
+    listCountries: state.systems.listCountries,
   }));
   const dataFilter = ['genres', 'year', 'region'];
-
   const {showModal, onRequestClose} = props;
   const refFlatList = useRef<any>();
   const refFlatListYear = useRef<any>();
@@ -34,6 +34,15 @@ export const ModalFilter = (props: any) => {
   const [activeArray, setActiveArray] = useState<any[]>([]);
   const [isActiveItem, setIsActiveItem] = useState<number>(0);
   const numberYears = lodash.range(+moment().format('yyyy') - 1899);
+
+  useEffect(() => {
+    if (!!showModal) {
+      setIsActiveItem(0);
+      setItemFocus(+moment().format('yyyy'));
+      setActiveArray([]);
+    }
+  }, [showModal]);
+
   const onPressGenres = (id: string) => () => {
     const indexActive = activeArray?.findIndex((it) => it == id);
     if (indexActive != -1) {
@@ -64,21 +73,20 @@ export const ModalFilter = (props: any) => {
       </Text>
     );
   };
-
-  useEffect(() => {
-    if (!!showModal) {
-      setIsActiveItem(0);
-      setItemFocus(+moment().format('yyyy'));
-      setActiveArray([]);
-    }
-  }, [showModal]);
-
+  let listCountriesAutoComplete: any[] = [];
+  listCountries?.forEach((it: any) => {
+    listCountriesAutoComplete?.push(it?.english_name);
+  });
+  listCountriesAutoComplete?.filter((it: string) => {
+    return it?.includes('Andorra');
+  });
+  console.log('listCountriesAutoComplete', listCountriesAutoComplete);
   const renderItem = ({item, index}: any) => {
     switch (index) {
       case 0:
         return (
           <View style={styles.genresContainer}>
-            {movieGenres?.genres?.map((it: any) => {
+            {movieGenres?.map((it: any) => {
               const isActive = activeArray?.some((itAc) => itAc == it?.id);
               return (
                 <LinearGradient
@@ -121,7 +129,7 @@ export const ModalFilter = (props: any) => {
       case 2:
         return (
           <View style={{width: wp(100), marginTop: hp(3)}}>
-            <AutoComplete />
+            <AutoComplete data={listCountriesAutoComplete} value={'Andorra'} />
           </View>
         );
       default:
