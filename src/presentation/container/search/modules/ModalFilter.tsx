@@ -6,20 +6,20 @@ import {
   ScrollView,
   TouchableOpacity,
   FlatList,
+  TextInput,
 } from 'react-native';
 import {Modal} from '@components';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import {Fonts} from '@resources';
+import {Colors, Fonts} from '@resources';
 import {useSelector} from 'react-redux';
 import {RootStoreState} from '@shared-state';
 import LinearGradient from 'react-native-linear-gradient';
 import {translate} from '@helpers';
 import moment from 'moment';
 import lodash from 'lodash';
-import AutoComplete from 'react-native-autocomplete-input';
 export const ModalFilter = (props: any) => {
   const {movieGenres, listCountries} = useSelector((state: RootStoreState) => ({
     movieGenres: state.systems.movieGenres,
@@ -27,13 +27,19 @@ export const ModalFilter = (props: any) => {
   }));
   const dataFilter = ['genres', 'year', 'region'];
   const {showModal, onRequestClose} = props;
+  const numberYears = lodash.range(+moment().format('yyyy') - 1899);
+
   const refFlatList = useRef<any>();
   const refFlatListYear = useRef<any>();
   const refScrollView = useRef<any>();
   const [itemFocus, setItemFocus] = useState<number>(+moment().format('yyyy'));
   const [activeArray, setActiveArray] = useState<any[]>([]);
   const [isActiveItem, setIsActiveItem] = useState<number>(0);
-  const numberYears = lodash.range(+moment().format('yyyy') - 1899);
+  const [valueAutoComplete, setValueAutoComplete] = useState<string>('');
+
+  const __listCountries = listCountries?.filter((it: any) =>
+    it?.english_name?.includes(valueAutoComplete),
+  );
 
   useEffect(() => {
     if (!!showModal) {
@@ -73,14 +79,6 @@ export const ModalFilter = (props: any) => {
       </Text>
     );
   };
-  let listCountriesAutoComplete: any[] = [];
-  listCountries?.forEach((it: any) => {
-    listCountriesAutoComplete?.push(it?.english_name);
-  });
-  listCountriesAutoComplete?.filter((it: string) => {
-    return it?.includes('Andorra');
-  });
-  console.log('listCountriesAutoComplete', listCountriesAutoComplete);
   const renderItem = ({item, index}: any) => {
     switch (index) {
       case 0:
@@ -128,8 +126,39 @@ export const ModalFilter = (props: any) => {
         );
       case 2:
         return (
-          <View style={{width: wp(100), marginTop: hp(3)}}>
-            <AutoComplete data={listCountriesAutoComplete} value={'Andorra'} />
+          <View style={{width: wp(90), marginTop: hp(3), marginBottom: hp(1)}}>
+            <TextInput
+              placeholder={'Nhập quốc gia...'}
+              placeholderTextColor={'#cccbcb75'}
+              style={{
+                borderColor: '#fff',
+                borderWidth: 1,
+                borderRadius: wp(1),
+                width: '100%',
+                alignSelf: 'center',
+                paddingLeft: wp(2),
+                color: '#fff',
+                fontFamily: Fonts.Open_Sans_Regular,
+              }}
+              value={valueAutoComplete}
+              onChangeText={(value) => setValueAutoComplete(value)}
+            />
+            <FlatList
+              data={__listCountries}
+              showsVerticalScrollIndicator={false}
+              renderItem={({item}) => {
+                return (
+                  <TouchableOpacity
+                    style={{marginTop: hp(0.5)}}
+                    onPress={() => setValueAutoComplete(item?.english_name)}>
+                    <Text style={styles.txtTitleGeneral}>
+                      {item?.english_name}
+                    </Text>
+                  </TouchableOpacity>
+                );
+              }}
+              style={{marginStart: wp(1)}}
+            />
           </View>
         );
       default:
