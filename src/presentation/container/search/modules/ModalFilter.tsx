@@ -42,7 +42,7 @@ export const ModalFilter = (props: any) => {
   );
 
   useEffect(() => {
-    if (!!showModal) {
+    if (showModal) {
       setIsActiveItem(0);
       setItemFocus(+moment().format('yyyy'));
       setActiveArray([]);
