@@ -2,7 +2,7 @@ import {App} from '@resources';
 import React from 'react';
 import {StyleSheet} from 'react-native';
 import YouTube from 'react-native-youtube';
-export const YoutubeFullScreen = (props: any) => {
+export const YoutubeFullScreen = (props any) => {
   const videoID = props?.route?.params?.videoID;
   return (
     <YouTube
@@ -14,5 +14,5 @@ export const YoutubeFullScreen = (props: any) => {
   );
 };
 const styles = StyleSheet.create({
-  container: {position: 'absolute', left: 0, right: 0, top: 0, bottom: 0},
+  container {position 'absolute', left 0, right 0, top 0, bottom 0},
 });
